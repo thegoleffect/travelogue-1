@@ -5,6 +5,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 
 var config = {
+    "hostname": "localhost",
     "port": 8000,
     "yar": {
         "cookieOptions": {
@@ -20,7 +21,7 @@ var config = {
     }
 };
 
-var server = new Hapi.Server('localhost', config.port);
+var server = new Hapi.Server(config.hostname, config.port);
 Travelogue.configure(server, Passport, config);
 
 var USERS = {

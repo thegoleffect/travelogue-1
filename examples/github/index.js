@@ -5,6 +5,7 @@ var GithubStrategy = require('passport-github').Strategy;
 
 
 var config = {
+    "hostname": "localhost",
     "port": 8000,
     "yar": {
         "cookieOptions": {
@@ -16,12 +17,12 @@ var config = {
         "urls": {
             "failureRedirect": "/login"
         }
-    },
-    "github": {
-        clientID: "...",
-        clientSecret: "...",
-        callbackURL: "http://localhost:8000/auth/github/callback"
     }
+};
+config.github = {
+    clientID: "...",
+    clientSecret: "...",
+    callbackURL: "http://" + config.hostname + ":" + config.port + "/auth/github/callback"
 };
 
 var server = new Hapi.Server('localhost', config.port);

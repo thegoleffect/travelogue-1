@@ -5,6 +5,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 
 var config = {
+    "hostname": "localhost",
     "port": 8000,
     "yar": {
         "cookieOptions": {
@@ -16,14 +17,15 @@ var config = {
         "urls": {
             "failureRedirect": "/login"
         }
-    },
-    "facebook": {
-        "clientID": "...",
-        "clientSecret": "...",
-        "callbackURL": "http://localhost:8000/auth/facebook/callback"
     }
 };
-var server = new Hapi.Server('localhost', config.port);
+config.facebook = {
+    "clientID": "...",
+    "clientSecret": "...",
+    "callbackURL": "http://" + config.hostname + ":" + config.port + "/auth/facebook/callback"
+};
+
+var server = new Hapi.Server(config.hostname, config.port);
 Travelogue.configure(server, Passport, config);
 
 
